@@ -7,7 +7,7 @@ Folderul configuration conține două fișiere JSON. Unul pentru versete în ima
 ## Instalare și librării externe
 
 Instalarea se face de pe requirements.txt <br>
-Librăriile folosite sunt requests, flask și dotenv.
+Librăriile folosite sunt requests, flask și dotenv. Deși toate trei sunt instalate prin requirements.txt, cea care defapt e folosită, este Flask.
 
 ## Assets
 
