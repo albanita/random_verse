@@ -16,30 +16,31 @@
             width: 100vw;
             margin: 0;
             overflow: hidden;
-            background-color: #000; /* Fondo negro de respaldo para evitar parpadeos blancos */
+            background-color: #000;
         }
     </style>
 
     <script>
         async function displayRandomItem() {
-            try {
-                const response = await fetch("configuration/versete_imagini.json");
-                const items = await response.json();
 
-                const randomItem = items[Math.floor(Math.random() * items.length)];
-                const path = "./static/img/" + randomItem.photo;
+            let items = [];
 
-                // Truco de optimización: Precargar la imagen en memoria antes de aplicarla al body
-                const img = new Image();
-                img.src = path;
-                img.onload = function() {
-                    // Solo cuando la imagen ya se ha descargado por completo, se muestra en el fondo
-                    document.getElementById("main_body").style.backgroundImage = `url('${path}')`;
-                };
-
-            } catch (error) {
-                console.error("Error al cargar el archivo JSON o la imagen:", error);
+            for (let i = 0; i < 47; i++) {
+                let j = i + 1;
+                items[i] = { photo: j + ".png" };
             }
+
+            const randomItem = items[Math.floor(Math.random() * items.length)];
+            const path = "./static/img/" + randomItem.photo;
+
+            // Optimization trick: preload the image in the page
+            const img = new Image();
+            img.src = path;
+            img.onload = function() {
+                // Show the background only when the image is fully downloaded
+                document.getElementById("main_body").style.backgroundImage = `url('${path}')`;
+            };
+            
         }
 
         window.addEventListener("DOMContentLoaded", displayRandomItem);
