@@ -5,54 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Verset Conferință</title>
     
-    <!-- Rutas relativas estándar para páginas estáticas -->
     <link href="./static/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed; /* Keep the image static */
-            
-            /* Make it ocuppy 100% the height and width */
+            background-attachment: fixed;
             height: 100vh;
             width: 100vw;
             margin: 0;
-            overflow: hidden; /* Avoid overflow */
+            overflow: hidden;
+            background-color: #000; /* Fondo negro de respaldo para evitar parpadeos blancos */
         }
     </style>
 
-    <!-- Script principal que hace todo el trabajo al cargar la página -->
     <script>
         async function displayRandomItem() {
             try {
-                // 1. Cargar el JSON mediante fetch (ruta relativa)
                 const response = await fetch("configuration/versete_imagini.json");
                 const items = await response.json();
 
-                // 2. Elegir un elemento aleatorio del array
                 const randomItem = items[Math.floor(Math.random() * items.length)];
-                const path = "./static/img/" + randomItem.photo
-                console.log("Seleccionado:", path);
+                const path = "./static/img/" + randomItem.photo;
 
-                document.getElementById(elementId="main_body").style.backgroundImage = `url('${path}')`;
-
-                //return path
+                // Truco de optimización: Precargar la imagen en memoria antes de aplicarla al body
+                const img = new Image();
+                img.src = path;
+                img.onload = function() {
+                    // Solo cuando la imagen ya se ha descargado por completo, se muestra en el fondo
+                    document.getElementById("main_body").style.backgroundImage = `url('${path}')`;
+                };
 
             } catch (error) {
-                console.error("Error al cargar el archivo JSON:", error);
+                console.error("Error al cargar el archivo JSON o la imagen:", error);
             }
         }
 
-        // Ejecutar la función automáticamente al abrir la página
-        //displayRandomItem();
         window.addEventListener("DOMContentLoaded", displayRandomItem);
     </script>
 </head>
 <body id="main_body" class="d-flex justify-content-center align-items-center min-vh-100 m-0">
     
-    
-    <!-- Bootstrap JavaScript Bundle with Popper -->
     <script src="./static/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
