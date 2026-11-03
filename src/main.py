@@ -18,8 +18,10 @@ json_path = os.path.join(
 
 @app.route("/")
 def home():
-  verset_photo_random = get_random_verse(source_configuration=json_path)
-  return render_template("verset_imagine.html", data=verset_photo_random)
+  #verset_photo_random = get_random_verse(source_configuration=json_path)
+  #return render_template("verset_imagine.html", data=verset_photo_random)
+
+  return render_template("index.html")
 
 
 if __name__ == "__main__":
