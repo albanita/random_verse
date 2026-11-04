@@ -7,7 +7,7 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 app = Flask(
   __name__,
-  template_folder=os.path.join(project_root, "templates"),
+  template_folder=project_root, #os.path.join(project_root, "templates"),
   static_folder=os.path.join(project_root, "static"),
 )
 
