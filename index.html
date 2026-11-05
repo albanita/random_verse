@@ -40,9 +40,7 @@
         
     </style>
 
-    <script>
-
-        let page_open = false;        
+    <script>       
 
         async function displayRandomItem() {
 
@@ -67,15 +65,8 @@
             
         }
 
-        // 1. Open the page for the first time
         window.addEventListener("DOMContentLoaded", displayRandomItem);
 
-        // 2. Refresh the page when the page is already opened and avoid open a new tab
-        document.addEventListener("visibilitychange", function() {
-            if (page_open) {
-                displayRandomItem(); // Vuelve a elegir y mostrar una imagen aleatoria al instante
-            }
-        });
     </script>
 </head>
 <body id="main_body" class="d-flex justify-content-center align-items-center min-vh-100 m-0">
